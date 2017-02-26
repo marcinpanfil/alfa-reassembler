@@ -54,9 +54,9 @@ public class Reassemble {
         String overlapFragment = getOverlapFragment(firstString, secondString);
         String mergeStr;
         if (secondString.startsWith(overlapFragment)) {
-            mergeStr = firstString + secondString.replaceAll(overlapFragment, BLANK);
+            mergeStr = firstString + secondString.replaceFirst(overlapFragment, BLANK);
         } else {
-            mergeStr = secondString.replace(overlapFragment, BLANK) + firstString;
+            mergeStr = secondString.replaceFirst(overlapFragment, BLANK) + firstString;
         }
         return mergeStr;
     }

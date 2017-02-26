@@ -14,6 +14,11 @@ class ReassembleTest extends Specification {
         overlapCounter.reassemble(line) == result
         where:
         line                                              || result
+        "AaBb;bb"                                         || "AaBbb"
+        "bCc;AabCc"                                       || "AabCc"
+        "aA;AbB;aAA"                                      || "aAAbB"
+        "aA;AbB;aaA"                                      || "aaAbB"
+        "a;a;aA;bA;a"                                     || "baA"
         "O draconia;conian devil! Oh la;h lame sa;saint!" || "O draconian devil! Oh lame saint!"
         TestString.INPUT                                  || TestString.OUTPUT
 
@@ -25,14 +30,14 @@ class ReassembleTest extends Specification {
         expect:
         overlapCounter.findTwoBestFragmentsAndMergedThem(line) == result
         where:
-        line                   || result
+        line                                              || result
         "O draconia;conian devil! Oh la;h lame sa;saint!" || "O draconian devil! Oh la;h lame sa;saint!"
         "O draconian devil! Oh la;h lame sa;saint!"       || "O draconian devil! Oh lame sa;saint!"
         "O draconian devil! Oh lame sa;saint!"            || "O draconian devil! Oh lame saint!"
-        TestString.INPUT      || TestString.FIRST_STEP
-        TestString.FIRST_STEP || TestString.SECOND_STEP
-        TestString.SECOND_STEP || TestString.THIRD_STEP
-        TestString.THIRD_STEP  || TestString.FOURTH_STEP
+        TestString.INPUT                                  || TestString.FIRST_STEP
+        TestString.FIRST_STEP                             || TestString.SECOND_STEP
+        TestString.SECOND_STEP                            || TestString.THIRD_STEP
+        TestString.THIRD_STEP                             || TestString.FOURTH_STEP
     }
 
     def 'test merge'() {
