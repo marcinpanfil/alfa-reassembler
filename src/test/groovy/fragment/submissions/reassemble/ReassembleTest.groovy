@@ -1,5 +1,6 @@
 package fragment.submissions.reassemble
 
+import fragment.submissions.MarcinPanfil
 import spock.lang.Specification
 
 /**
@@ -7,9 +8,9 @@ import spock.lang.Specification
  */
 class ReassembleTest extends Specification {
 
+    def overlapCounter = new MarcinPanfil.Reassemble()
+
     def 'should merge into one line'() {
-        given:
-        def overlapCounter = new Reassemble()
         expect:
         overlapCounter.reassemble(line) == result
         where:
@@ -25,8 +26,6 @@ class ReassembleTest extends Specification {
     }
 
     def 'should find two best fragments and merge them into one line'() {
-        given:
-        def overlapCounter = new Reassemble()
         expect:
         overlapCounter.findTwoBestFragmentsAndMergedThem(line) == result
         where:
@@ -41,8 +40,6 @@ class ReassembleTest extends Specification {
     }
 
     def 'test merge'() {
-        given:
-        def overlapCounter = new Reassemble()
         expect:
         overlapCounter.merge(toMerge1, toMerge2) == merged
         where:
@@ -54,8 +51,6 @@ class ReassembleTest extends Specification {
     }
 
     def 'should return overlap size'() {
-        given:
-        def overlapCounter = new Reassemble()
         expect:
         overlapCounter.getOverlapFragment(toOverlap1, toOverlap2) == overlapFragment
         where:
