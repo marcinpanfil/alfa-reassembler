@@ -18,10 +18,10 @@ public class MarcinPanfil {
         }
     }
 
-    static class Reassemble {
+    private static class Reassemble {
 
-        public static final String SEMICOLON = ";";
-        public static final String BLANK = "";
+        private static final String SEMICOLON = ";";
+        private static final String BLANK = "";
 
         public String reassemble(String line) {
             while (line.contains(SEMICOLON)) {

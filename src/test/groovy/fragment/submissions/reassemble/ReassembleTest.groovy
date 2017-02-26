@@ -15,6 +15,7 @@ class ReassembleTest extends Specification {
         overlapCounter.reassemble(line) == result
         where:
         line                                              || result
+        "aAaA;aAbaAa"                                     || "aAbaAaA"
         "AaBb;bb"                                         || "AaBbb"
         "bCc;AabCc"                                       || "AabCc"
         "aA;AbB;aAA"                                      || "aAAbB"

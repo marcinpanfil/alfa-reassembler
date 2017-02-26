@@ -2,6 +2,8 @@ package fragment.submissions.reassemble
 /**
  * Created by Marcin Panfil on 26.02.17.
  */
+
+//just to check if I understand algorithm
 class TestString {
 
     public static String INPUT = "m quaerat voluptatem.;pora incidunt ut labore et d;, consectetur, adipisci " +
