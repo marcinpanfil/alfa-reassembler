@@ -69,11 +69,19 @@ public class MarcinPanfil {
             String overlapFragment = getOverlapFragment(firstString, secondString);
             String mergeStr;
             if (secondString.startsWith(overlapFragment)) {
-                mergeStr = firstString + secondString.replaceFirst(overlapFragment, BLANK);
+                mergeStr = firstString + replaceOnce(secondString, overlapFragment);
             } else {
-                mergeStr = secondString.replaceFirst(overlapFragment, BLANK) + firstString;
+                mergeStr = replaceOnce(secondString, overlapFragment) + firstString;
             }
             return mergeStr;
+        }
+
+        private String replaceOnce(String string, String overlap) {
+            int end = string.indexOf(overlap, 0);
+            StringBuilder sb = new StringBuilder();
+            sb.append(string.substring(0, end));
+            sb.append(string.substring(end + overlap.length()));
+            return sb.toString();
         }
 
         private String getOverlapFragment(String firstString, String secondString) {

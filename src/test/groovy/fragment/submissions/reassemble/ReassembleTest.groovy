@@ -17,6 +17,7 @@ class ReassembleTest extends Specification {
         line                                              || result
         "aAaA;aAbaAa"                                     || "aAbaAaA"
         "AaBb;bb"                                         || "AaBbb"
+        '/"Ab;/"A&*;&*B;B<>\\'                            || '/"Ab&*B<>\\'
         "bCc;AabCc"                                       || "AabCc"
         "aA;AbB;aAA"                                      || "aAAbB"
         "aA;AbB;aaA"                                      || "aaAbB"
