@@ -18,6 +18,7 @@ class ReassembleTest extends Specification {
         "owns;He owns a;wns a clown"                      || "He owns a clown"
         "star;target s;get star cluster"                  || "target star cluster"
         "aAaA;aAbaAa"                                     || "aAbaAaA"
+        "Ab;AA;AAb"                                       || "AAb"
         "AaBb;bb"                                         || "AaBbb"
         '/"Ab;/"A&*;&*B;B<>\\'                            || '/"Ab&*B<>\\'
         "</>'';''^"                                       || "</>''^"
