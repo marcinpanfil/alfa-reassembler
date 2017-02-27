@@ -15,9 +15,12 @@ class ReassembleTest extends Specification {
         overlapCounter.reassemble(line) == result
         where:
         line                                              || result
+        "owns;He owns a;wns a clown"                      || "He owns a clown"
+        "star;target s;get star cluster"                  || "target star cluster"
         "aAaA;aAbaAa"                                     || "aAbaAaA"
         "AaBb;bb"                                         || "AaBbb"
         '/"Ab;/"A&*;&*B;B<>\\'                            || '/"Ab&*B<>\\'
+        "</>'';''^"                                       || "</>''^"
         "bCc;AabCc"                                       || "AabCc"
         "aA;AbB;aAA"                                      || "aAAbB"
         "aA;AbB;aaA"                                      || "aaAbB"
@@ -32,6 +35,8 @@ class ReassembleTest extends Specification {
         overlapCounter.findTwoBestFragmentsAndMergedThem(line) == result
         where:
         line                                              || result
+        "star;target s;get star cluster"                  || "star;target star cluster"
+        "owns;He owns a;wns a clown"                      || "owns;He owns a clown"
         "O draconia;conian devil! Oh la;h lame sa;saint!" || "O draconian devil! Oh la;h lame sa;saint!"
         "O draconian devil! Oh la;h lame sa;saint!"       || "O draconian devil! Oh lame sa;saint!"
         "O draconian devil! Oh lame sa;saint!"            || "O draconian devil! Oh lame saint!"
@@ -46,6 +51,7 @@ class ReassembleTest extends Specification {
         overlapCounter.merge(toMerge1, toMerge2) == merged
         where:
         toMerge1                       | toMerge2                                  || merged
+        "owns"                         | "He owns a clown"                         || "He owns a clown"
         "O draconia"                   | "conian devil!"                           || "O draconian devil!"
         "Oh la"                        | "h lame sa"                               || "Oh lame sa"
         "Oh lame sa"                   | "saint!"                                  || "Oh lame saint!"
@@ -57,6 +63,7 @@ class ReassembleTest extends Specification {
         overlapCounter.getOverlapFragment(toOverlap1, toOverlap2) == overlapFragment
         where:
         toOverlap1                     | toOverlap2                                || overlapFragment
+        "owns"                         | "He owns a clown"                         || "owns"
         "ABCDEF"                       | "DEFG"                                    || "DEF"
         "ABCDEF"                       | "XYZABC"                                  || "ABC"
         "ABCDEF"                       | "BCDE"                                    || "BCDE"

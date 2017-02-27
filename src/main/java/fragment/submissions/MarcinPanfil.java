@@ -68,6 +68,11 @@ public class MarcinPanfil {
         private String merge(String firstString, String secondString) {
             String overlapFragment = getOverlapFragment(firstString, secondString);
             String mergeStr;
+            if (firstString.equals(overlapFragment)) {
+                return secondString;
+            } else if (secondString.equals(overlapFragment)) {
+                return firstString;
+            }
             if (secondString.startsWith(overlapFragment)) {
                 mergeStr = firstString + replaceOnce(secondString, overlapFragment);
             } else {
@@ -86,22 +91,30 @@ public class MarcinPanfil {
 
         private String getOverlapFragment(String firstString, String secondString) {
             String overlapStr = BLANK;
-            for (int i = 0; i < secondString.length(); i++) {
-                String beginning = secondString.substring(0, i);
-                String ending = secondString.substring(i);
-                if (firstString.contains(beginning)) {
+            overlapStr = get(firstString, secondString, overlapStr);
+            overlapStr = get(secondString, firstString, overlapStr);
+
+            return overlapStr;
+        }
+
+        private String get(String firstString, String secondString, String overlapStr) {
+            for (int i = 0; i < firstString.length(); i++) {
+                String beginning = firstString.substring(0, i);
+                String ending = firstString.substring(i);
+                if (secondString.contains(beginning)) {
                     if (overlapStr.length() < i) {
                         overlapStr = beginning;
                     }
                 }
-                if (firstString.contains(ending)) {
-                    if (overlapStr.length() < secondString.length() - i) {
+                if (secondString.contains(ending)) {
+                    if (overlapStr.length() < firstString.length() - i) {
                         overlapStr = ending;
                     }
                 }
             }
             return overlapStr;
         }
+
     }
 
 }
