@@ -34,14 +34,18 @@ public class MarcinPanfil {
             String[] fragments = line.split(SEMICOLON);
             int firstStringIndex = -1;
             int secondStringIndex = -1;
-            int overlap = 0;
+            int overlap = -1;
             for (int i = 0; i < fragments.length - 1; i++) {
-                for (int j = i + 1; j < fragments.length; j++) {
-                    String overlapStr = getOverlapFragment(fragments[i], fragments[j]);
-                    if (overlap < overlapStr.length()) {
-                        firstStringIndex = i;
-                        secondStringIndex = j;
-                        overlap = overlapStr.length();
+                if (overlap < fragments.length - i) {
+                    for (int j = i + 1; j < fragments.length; j++) {
+                        String overlapStr = getOverlapFragment(fragments[i], fragments[j]);
+                        if (overlapStr.length() <= fragments[j].length()) {
+                            if (overlap < overlapStr.length()) {
+                                firstStringIndex = i;
+                                secondStringIndex = j;
+                                overlap = overlapStr.length();
+                            }
+                        }
                     }
                 }
             }
@@ -92,7 +96,9 @@ public class MarcinPanfil {
         private String getOverlapFragment(String firstString, String secondString) {
             String overlapStr = BLANK;
             overlapStr = get(firstString, secondString, overlapStr);
-            overlapStr = get(secondString, firstString, overlapStr);
+            if (overlapStr.length() != secondString.length()) {
+                overlapStr = get(secondString, firstString, overlapStr);
+            }
 
             return overlapStr;
         }
